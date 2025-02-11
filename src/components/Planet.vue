@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div class="main-planet">
     <h1>{{ planet.title }}</h1>
     <p v-for="(paragraph, index) in planet.description" :key="index">{{ paragraph }}</p>
   </div>

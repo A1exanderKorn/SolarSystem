@@ -1,11 +1,11 @@
 <template>
   <div class="sidebar">
-    <button @click="showInfo('age')">Возраст</button>
-    <button @click="showInfo('mass')">Масса</button>
-    <button @click="showInfo('nearestStar')">Ближайшая звезда</button>
-    <button @click="showInfo('satellites')">Спутники</button>
-    <button @click="showInfo('smallBodies')">Малые тела</button>
-    <button @click="showInfo('comets')">Кометы</button>
+    <a @click="showInfo('age')">Возраст</a>
+    <a @click="showInfo('mass')">Масса</a>
+    <a @click="showInfo('nearestStar')">Ближайшая звезда</a>
+    <a @click="showInfo('satellites')">Спутники</a>
+    <a @click="showInfo('smallBodies')">Малые тела</a>
+    <a @click="showInfo('comets')">Кометы</a>
     <p v-if="activeInfo">{{ activeInfo }}</p>
   </div>
 </template>
@@ -18,6 +18,6 @@ const solarSystem = useSolarSystem();
 const activeInfo = ref("");
 
 function showInfo(info: keyof typeof solarSystem) {
-  activeInfo.value = solarSystem[info];
+  activeInfo.value = activeInfo.value == solarSystem[info] ? "" : solarSystem[info];
 }
 </script>
