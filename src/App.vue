@@ -25,9 +25,9 @@ const planet = computed(() => {
 
 const rootClass = computed(() => (planet.value ? planet.value.name : "default"));
 
-const isMobile = ref(window.innerWidth < 1000);
+const isMobile = ref(window.innerWidth < 1100);
 const updateSize = () => {
-  isMobile.value = window.innerWidth < 1000;
+  isMobile.value = window.innerWidth < 1100;
 };
 window.addEventListener("resize", updateSize);
 

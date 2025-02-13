@@ -1,5 +1,5 @@
 <template>
-  <div class="sidebar">
+  <div class="sidebar" v-if="!isMobile">
     <a @click="showInfo('age')">Возраст Солнечной системы</a>
     <a @click="showInfo('mass')">Масса Солнечной системы</a>
     <a @click="showInfo('nearestStar')">Ближайшая звезда</a>
@@ -14,7 +14,7 @@
 
 <script setup lang="ts">
 import { useSolarSystem } from "@/data/useSolarSystem";
-import { ref } from "vue";
+import { ref, inject } from "vue";
 
 const solarSystem = useSolarSystem();
 const activeInfo = ref("");
@@ -22,6 +22,8 @@ const activeInfo = ref("");
 function showInfo(info: keyof typeof solarSystem) {
   activeInfo.value = activeInfo.value == solarSystem[info] ? "" : solarSystem[info];
 }
+
+const isMobile = ref(inject("isMobile"));
 </script>
 
 <style scoped>
