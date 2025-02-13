@@ -22,13 +22,6 @@
 <script setup>
 import { ref } from "vue";
 import planets from "@/data/planets";
-
-const menuOpen = ref(false);
-const mobile = ref(false);
-
-const toggleMenu = () => {
-  menuOpen.value = !menuOpen.value;
-};
 </script>
 
 <style></style>

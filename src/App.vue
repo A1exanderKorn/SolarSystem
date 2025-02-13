@@ -1,5 +1,5 @@
 <template>
-  <div class="root" :class="rootClass">
+  <div id="root" class="root" :class="rootClass">
     <Header></Header>
     <router-view></router-view>
     <Footer></Footer>
@@ -7,12 +7,13 @@
 </template>
 
 <script setup lang="ts">
-import { provideSolarSystem } from "./data/useSolarSystem";
 import Header from "@/components/Header.vue";
 import Footer from "@/components/Footer.vue";
-import { computed, reactive } from "vue";
+import { computed, reactive, onMounted, ref, onUnmounted, provide, inject } from "vue";
 import { useRoute } from "vue-router";
 import planets from "@/data/planets";
+import { provideSolarSystem } from "./data/useSolarSystem";
+
 provideSolarSystem();
 
 const route = useRoute();
@@ -23,6 +24,14 @@ const planet = computed(() => {
 });
 
 const rootClass = computed(() => (planet.value ? planet.value.name : "default"));
+
+const isMobile = ref(window.innerWidth < 1000);
+const updateSize = () => {
+  isMobile.value = window.innerWidth < 1000;
+};
+window.addEventListener("resize", updateSize);
+
+provide("isMobile", isMobile);
 </script>
 
 <style>
