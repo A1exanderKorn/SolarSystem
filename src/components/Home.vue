@@ -70,10 +70,10 @@
 <script setup lang="ts">
 import Sidebar from "@/components/Sidebar.vue";
 import { ref, onMounted, onUnmounted, reactive } from "vue";
-const isMobile = ref(window.innerWidth < 600);
+const isMobile = ref(window.innerWidth < 800);
 
 const updateSize = () => {
-  isMobile.value = window.innerWidth < 1000;
+  isMobile.value = window.innerWidth < 800;
 };
 
 const stars = reactive<

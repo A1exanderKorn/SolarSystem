@@ -35,6 +35,11 @@ provide("isMobile", isMobile);
 </script>
 
 <style>
+.root .ul a {
+  border-radius: 5px !important;
+  padding: 2px !important;
+}
+
 .root.default,
 .root.Sat {
   background: radial-gradient(ellipse at center, rgba(8, 25, 42, 1) 19%, rgba(1, 4, 6, 1) 100%);
@@ -47,6 +52,12 @@ provide("isMobile", isMobile);
 .root.Sat .header {
   background: #353358;
 }
+.root.Sat .ul a,
+.root.default .ul a {
+  background-color: #b09da4;
+  color: #ac3b61;
+  border: 1px solid #b09da4;
+}
 
 .root.Earth {
   background: none;
@@ -57,8 +68,10 @@ provide("isMobile", isMobile);
 .root.Earth .header {
   background-color: #687864;
 }
-.root.Earth .header a {
+.root.Earth .ul a {
+  background-color: #8fc1e3;
   color: #f7f9fb;
+  border: 1px solid #8fc1e3;
 }
 .root.Earth .main-planet,
 .root.Earth .main-planet h1 {
@@ -80,7 +93,10 @@ provide("isMobile", isMobile);
   background-color: #5c2018;
 }
 .root.Merc .ul a {
+  background-color: #4285f4;
   color: #f3e0dc;
+  border: 1px solid #4285f4;
+  text-shadow: none;
 }
 .root.Merc .main-planet,
 .root.Merc .main-planet h1 {
@@ -97,7 +113,9 @@ provide("isMobile", isMobile);
   background-color: #bab2b5;
 }
 .root.Ven .ul a {
+  background-color: #b09da4;
   color: #ac3b61;
+  border: 1px solid #b09da4;
 }
 .root.Ven .main-planet {
   color: #123c69;
@@ -137,9 +155,14 @@ provide("isMobile", isMobile);
   background-color: #1c6c36;
 }
 .root.Ur .main-planet,
-.root.Ur .main-planet h1,
-.root.Ur .ul a {
+.root.Ur .main-planet h1 {
   color: #ffe6ba;
+}
+.root.Ur .ul a {
+  background-color: #0e4e23;
+  color: #ffe6ba;
+  border: 1px solid #1c6c36;
+  text-shadow: none;
 }
 
 .root.Nep {
@@ -151,7 +174,12 @@ provide("isMobile", isMobile);
 .root.Nep .header {
   background-color: #553d67;
 }
-.root.Nep .ul a,
+.root.Nep .ul a {
+  background-color: #4c1905;
+  color: #b00000;
+  border: 1px solid #4c1905;
+  text-shadow: none;
+}
 .root.Nep .main-planet h1 {
   color: #f64c72;
 }
@@ -169,7 +197,11 @@ provide("isMobile", isMobile);
 .root.Sun .header {
   background-color: #f4976c;
 }
-.root.Sun .ul a,
+.root.Sun .ul a {
+  background-color: #d2fdff;
+  color: #303c6c;
+  border: 1px solid #d2fdff;
+}
 .root.Sun .main-planet h1 {
   color: #303c6c;
 }
@@ -188,7 +220,10 @@ provide("isMobile", isMobile);
   background-color: #4c1905;
 }
 .root.Mars .ul a {
-  color: #f75151;
+  background-color: #290e03;
+  color: #b00000;
+  border: 1px solid #4c1905;
+  text-shadow: none;
 }
 .root.Mars .main-planet {
   color: #4c1905;
