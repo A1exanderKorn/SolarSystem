@@ -108,15 +108,6 @@ const randomBetween = (a, b) => {
 onMounted(() => {
   window.addEventListener("resize", updateSize);
   if (!isMobile.value) {
-    let newStars: {
-      position: string;
-      left: string;
-      top: string;
-      width: string;
-      height: string;
-      boxShadow: string;
-      animationDuration: string;
-    }[] = [];
     for (let i = 0; i < params.amount; i++) {
       let size =
         Math.round(Math.random() * 10) === 0

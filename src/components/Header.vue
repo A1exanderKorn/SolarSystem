@@ -32,7 +32,7 @@ import { inject, ref, watch } from "vue";
 import planets from "@/data/planets";
 
 const isMobile = ref(inject("isMobile"));
-let burgerClasses = ref("burger menu");
+const burgerClasses = ref("burger menu");
 
 watch(isMobile, (newValue) => {
   if (!newValue) {

@@ -1,6 +1,16 @@
 import { provide, inject, reactive } from "vue";
 
-const solarSystemData = reactive({
+const solarSystemToken = Symbol();
+interface solarSystem {
+  age: string;
+  mass: string;
+  nearestStar: string;
+  satellites: string;
+  smallBodies: string;
+  comets: string;
+}
+
+const solarSystemData: solarSystem = reactive({
   age: "4,5682±0,0006 млрд лет",
   mass: "1,0014 M☉ (~1,991253858 * 10³⁰ кг)",
   nearestStar: "Проксима Центавра (4,21—4,24 св. лет)",
@@ -10,9 +20,9 @@ const solarSystemData = reactive({
 });
 
 export function provideSolarSystem() {
-  provide("solarSystem", solarSystemData);
+  provide(solarSystemToken, solarSystemData);
 }
 
 export function useSolarSystem() {
-  return inject("solarSystem") as typeof solarSystemData;
+  return inject("solarSystem") as solarSystem;
 }
