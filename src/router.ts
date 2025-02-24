@@ -1,10 +1,11 @@
 import { createRouter, createWebHistory } from "vue-router";
-import Home from "@/components/Home.vue";
 import Planet from "@/components/Planet.vue";
+import Asteroids from "./components/Asteroids.vue";
 
 const routes = [
-  { path: "/", component: Home },
+  { path: "/", component: Planet, props: true },
   { path: "/planet/:name", component: Planet, props: true },
+  { path: "/asteroids", component: Asteroids },
 ];
 
 const router = createRouter({

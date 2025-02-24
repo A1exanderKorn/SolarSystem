@@ -1,14 +1,14 @@
 import { provide, inject, reactive } from "vue";
 
 const solarSystemToken = Symbol();
-interface solarSystem {
+type solarSystem = {
   age: string;
   mass: string;
   nearestStar: string;
   satellites: string;
   smallBodies: string;
   comets: string;
-}
+};
 
 const solarSystemData: solarSystem = reactive({
   age: "4,5682±0,0006 млрд лет",
@@ -24,5 +24,5 @@ export function provideSolarSystem() {
 }
 
 export function useSolarSystem() {
-  return inject("solarSystem") as solarSystem;
+  return inject(solarSystemToken) as solarSystem;
 }
