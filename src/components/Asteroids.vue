@@ -5,7 +5,30 @@
       <p class="image-description">{{ image.title }}</p>
     </n-card>
 
-    <n-card v-if="asteroids.length" title="Ближайшие астероиды" class="asteroid-card">
+    <n-card title="Выберите дату" class="date-card">
+      <n-input type="date" v-model:value="selectedDate" @update:value="fetchAsteroids" />
+    </n-card>
+
+    <n-card v-if="asteroids.length" title="Фильтры" class="filters-card">
+      <n-select
+        v-model:value="hazardFilter"
+        :options="hazardOptions"
+        label-field="label"
+        value-field="value"
+        placeholder="Опасные объекты"
+      />
+      <n-slider v-model:value="sizeFilter" :min="0.01" :max="1" step="0.01" />
+      <n-select
+        v-model:value="selectedDates"
+        multiple
+        :options="availableDates"
+        label-field="label"
+        value-field="value"
+        placeholder="Дата сближения"
+      />
+    </n-card>
+
+    <n-card v-if="filteredAsteroids.length" title="Ближайшие астероиды" class="asteroid-card">
       <n-table :bordered="true">
         <thead>
           <tr>
@@ -17,7 +40,7 @@
           </tr>
         </thead>
         <tbody>
-          <tr v-for="asteroid in asteroids" :key="asteroid.id">
+          <tr v-for="asteroid in filteredAsteroids" :key="asteroid.id">
             <td>{{ asteroid.name }}</td>
             <td>{{ asteroid.close_approach_date }}</td>
             <td>{{ asteroid.size }} км</td>
@@ -35,15 +58,46 @@
 </template>
 
 <script setup>
-import { ref, onMounted } from "vue";
-import { NCard, NTable, NImage } from "naive-ui";
+import { ref, onMounted, computed } from "vue";
+import { NCard, NTable, NImage, NInput, NSelect, NSlider } from "naive-ui";
 
 const image = ref(null);
 const asteroids = ref([]);
 const apiKey = "qgBvqrtZkceHildbaJAessN3vUs2lqHOsXu67hlr";
+const selectedDate = ref(new Date().toISOString().split("T")[0]);
+
+const hazardFilter = ref("all");
+const sizeFilter = ref(1);
+const selectedDates = ref([]);
+
+const hazardOptions = [
+  { label: "Все", value: "all" },
+  { label: "Опасные", value: "dangerous" },
+  { label: "Безопасные", value: "safe" },
+];
+
+const availableDates = computed(() => {
+  const uniqueDates = [...new Set(asteroids.value.map((a) => a.close_approach_date))];
+  return uniqueDates.map((date) => ({ label: date, value: date }));
+});
+
+const filteredAsteroids = computed(() => {
+  return asteroids.value.filter((asteroid) => {
+    const matchesHazard =
+      hazardFilter.value === "all" ||
+      (hazardFilter.value === "dangerous" && asteroid.hazardous) ||
+      (hazardFilter.value === "safe" && !asteroid.hazardous);
+
+    const matchesSize = asteroid.size <= sizeFilter.value;
+    const matchesDate =
+      selectedDates.value.length === 0 ||
+      selectedDates.value.includes(asteroid.close_approach_date);
+
+    return matchesHazard && matchesSize && matchesDate;
+  });
+});
 
 onMounted(async () => {
-  const today = new Date().toISOString().split("T")[0];
   try {
     const response = await fetch(`https://api.nasa.gov/planetary/apod?api_key=${apiKey}`);
 
@@ -54,19 +108,18 @@ onMounted(async () => {
   } catch (error) {
     console.error("Ошибка при получении данных:", error);
   }
+});
 
+const fetchAsteroids = async () => {
   try {
     const response = await fetch(
-      `https://api.nasa.gov/neo/rest/v1/feed?start_date=${today}&api_key=${apiKey}`
+      `https://api.nasa.gov/neo/rest/v1/feed?start_date=${selectedDate.value}&api_key=${apiKey}`
     );
-
-    if (!response.ok) {
-      throw new Error(`Ошибка: ${response.status} ${response.statusText}`);
-    }
-
+    if (!response.ok) throw new Error(`Ошибка: ${response.status} ${response.statusText}`);
     const data = await response.json();
-    asteroids.value = Object.keys(data.near_earth_objects)
-      .flatMap((date) => data.near_earth_objects[date])
+
+    asteroids.value = Object.values(data.near_earth_objects)
+      .flat()
       .map((asteroid) => ({
         id: asteroid.id,
         name: asteroid.name,
@@ -76,9 +129,11 @@ onMounted(async () => {
         nasa_jpl_url: asteroid.nasa_jpl_url,
       }));
   } catch (error) {
-    console.error("Ошибка при получении данных:", error);
+    console.error("Ошибка загрузки астероидов:", error);
   }
-});
+};
+
+onMounted(fetchAsteroids);
 </script>
 
 <style scoped>
