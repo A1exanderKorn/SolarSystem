@@ -90,18 +90,18 @@ body {
   cursor: pointer;
 }
 .main-footer {
+  height: 80px;
   width: 100%;
   height: auto;
   display: flex;
   flex-direction: row;
   flex-wrap: wrap;
   justify-content: space-around;
-
+  align-items: center;
   margin-top: 50px;
 }
 .main-footer img {
   height: 60px;
-  margin: 10px;
   width: auto;
 }
 
@@ -250,15 +250,14 @@ p.fade {
 
 .burgerUl a {
   padding: 12px 24px;
-  text-decoration: none; /* Убираем подчеркивание */
+  text-decoration: none;
   border-radius: 8px;
   width: 200px;
 }
 
-/* App styles */
 .root .ul a {
-  border-radius: 5px !important;
-  padding: 2px !important;
+  border-radius: 5px;
+  padding: 2px;
 }
 
 .root.default,
@@ -278,7 +277,8 @@ p.fade {
   background: #353358;
 }
 .root.Sat .ul a,
-.root.default .ul a {
+.root.default .ul a,
+.root.default .main-footer a.font-link {
   background-color: #b09da4;
   color: #ac3b61;
   border: 1px solid #b09da4;
@@ -293,7 +293,8 @@ p.fade {
 .root.Earth .header {
   background-color: #687864;
 }
-.root.Earth .ul a {
+.root.Earth .ul a,
+.root.Earth .main-footer a.font-link {
   background-color: #8fc1e3;
   color: #f7f9fb;
   border: 1px solid #8fc1e3;
@@ -317,7 +318,8 @@ p.fade {
 .root.Merc .header {
   background-color: #5c2018;
 }
-.root.Merc .ul a {
+.root.Merc .ul a,
+.root.Merc .main-footer a.font-link {
   background-color: #4285f4;
   color: #f3e0dc;
   border: 1px solid #4285f4;
@@ -338,7 +340,8 @@ p.fade {
 .root.Ven .header {
   background-color: #bab2b5;
 }
-.root.Ven .ul a {
+.root.Ven .ul a,
+.root.Ven .main-footer a.font-link {
   background-color: #b09da4;
   color: #ac3b61;
   border: 1px solid #b09da4;
@@ -358,7 +361,8 @@ p.fade {
 .root.Jup .header {
   background-color: #5c59464f;
 }
-.root.Jup .ul a {
+.root.Jup .ul a,
+.root.Jup .main-footer a.font-link {
   background-color: #c7aa92;
 }
 .root.Jup .main-planet {
@@ -385,7 +389,8 @@ p.fade {
 .root.Ur .main-planet h1 {
   color: #ffe6ba;
 }
-.root.Ur .ul a {
+.root.Ur .ul a,
+.root.Ur .main-footer a.font-link {
   background-color: #0e4e23;
   color: #ffe6ba;
   border: 1px solid #1c6c36;
@@ -401,7 +406,8 @@ p.fade {
 .root.Nep .header {
   background-color: #553d67;
 }
-.root.Nep .ul a {
+.root.Nep .ul a,
+.root.Nep .main-footer a.font-link {
   background-color: #4c1905;
   color: #b00000;
   border: 1px solid #4c1905;
@@ -425,7 +431,8 @@ p.fade {
 .root.Sun .header {
   background-color: #f4976c;
 }
-.root.Sun .ul a {
+.root.Sun .ul a,
+.root.Sun .main-footer a.font-link {
   background-color: #d2fdff;
   color: #303c6c;
   border: 1px solid #d2fdff;
@@ -448,7 +455,8 @@ p.fade {
 .root.Mars .header {
   background-color: #4c1905;
 }
-.root.Mars .ul a {
+.root.Mars .ul a,
+.root.Mars .main-footer a.font-link {
   background-color: #290e03;
   color: #b00000;
   border: 1px solid #4c1905;
@@ -463,4 +471,40 @@ p.fade {
 
 .root .container {
   text-shadow: none;
+}
+
+.container {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  max-width: 800px;
+  margin: auto;
+  padding: 20px;
+}
+
+.image-card,
+.asteroid-card {
+  border-radius: 12px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+}
+
+.image-description {
+  text-align: center;
+  font-size: 1.1em;
+  margin-top: 10px;
+}
+
+.asteroid-card th,
+.asteroid-card td {
+  padding: 10px;
+  text-align: left;
+}
+
+.n-card .danger {
+  color: red;
+  font-weight: bold;
+}
+
+.main-footer a.font-link {
+  height: 40%;
 }

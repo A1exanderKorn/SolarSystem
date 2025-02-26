@@ -88,7 +88,7 @@ const filteredAsteroids = computed(() => {
       (hazardFilter.value === "dangerous" && asteroid.hazardous) ||
       (hazardFilter.value === "safe" && !asteroid.hazardous);
 
-    const matchesSize = asteroid.size <= sizeFilter.value;
+    const matchesSize = asteroid.size <= sizeFilter.value || sizeFilter.value == 1;
     const matchesDate =
       selectedDates.value.length === 0 ||
       selectedDates.value.includes(asteroid.close_approach_date);
@@ -136,36 +136,4 @@ const fetchAsteroids = async () => {
 onMounted(fetchAsteroids);
 </script>
 
-<style scoped>
-.container {
-  display: flex;
-  flex-direction: column;
-  gap: 20px;
-  max-width: 800px;
-  margin: auto;
-  padding: 20px;
-}
-
-.image-card,
-.asteroid-card {
-  border-radius: 12px;
-  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
-}
-
-.image-description {
-  text-align: center;
-  font-size: 1.1em;
-  margin-top: 10px;
-}
-
-th,
-td {
-  padding: 10px;
-  text-align: left;
-}
-
-.danger {
-  color: red;
-  font-weight: bold;
-}
-</style>
+<style></style>
