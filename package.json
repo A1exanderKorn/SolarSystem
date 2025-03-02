@@ -9,13 +9,15 @@
     "preview": "vite preview",
     "build-only": "vite build",
     "type-check": "vue-tsc --build",
-    "lint": "eslint . --fix"
+    "lint": "eslint . --fix",
+    "test:e2e": "npx playwright test"
   },
   "dependencies": {
     "vue": "^3.5.13",
     "vue-router": "^4.5.0"
   },
   "devDependencies": {
+    "@playwright/test": "^1.50.1",
     "@tsconfig/node22": "^22.0.0",
     "@types/node": "^22.13.1",
     "@vitejs/plugin-vue": "^5.2.1",
